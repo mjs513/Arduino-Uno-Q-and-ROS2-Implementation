@@ -233,4 +233,230 @@ bash
 
 ---
 
+# USING TMUX COMMANDS
+
+
+
+# 🧩 **Prefix Key: Switching to `Ctrl+a`**
+```
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+```
+
+### What it does
+- Removes the default prefix (`Ctrl+b`)
+- Sets your new prefix to **Ctrl+a** — faster, closer to home row
+- Allows sending `Ctrl+a` to programs inside tmux when needed
+
+### How to use it
+Every tmux command starts with:
+
+```
+Ctrl+a
+```
+
+Example: split a pane vertically → `Ctrl+a -`
+
+---
+
+# 🖱️ **Mouse Mode**
+```
+set -g mouse on
+```
+
+### What it does
+Enables:
+- Click to select panes
+- Click to resize panes
+- Scroll wheel to scroll history
+
+### How to use it
+Just use your mouse naturally.  
+Scroll = scroll history  
+Drag pane borders = resize  
+Click pane = focus
+
+---
+
+# 🎨 **Terminal Colors**
+```
+set -g default-terminal "screen-256color"
+```
+
+### What it does
+Ensures tmux supports 256‑color output.  
+This fixes issues with ROS tools, colcon output, and vim/neovim themes.
+
+---
+
+# 🪟 **Pane Splitting**
+```
+bind | split-window -h
+bind - split-window -v
+```
+
+### What it does
+Adds intuitive shortcuts:
+
+- `Ctrl+a |` → split **left/right** (horizontal split)
+- `Ctrl+a -` → split **top/bottom** (vertical split)
+
+### How to use it
+Inside tmux:
+
+```
+Ctrl+a |
+Ctrl+a -
+```
+
+This is perfect for your 3–4 pane ROS dev layout.
+
+---
+
+# 🔀 **Pane Navigation (Arrow Keys)**
+```
+bind -n M-Left  select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up    select-pane -U
+bind -n M-Down  select-pane -D
+```
+
+### What it does
+Allows **instant pane switching** using:
+
+- **Alt + Left**
+- **Alt + Right**
+- **Alt + Up**
+- **Alt + Down**
+
+No prefix required.
+
+### How to use it
+Just press:
+
+```
+Alt + ←
+Alt + →
+Alt + ↑
+Alt + ↓
+```
+
+This is the fastest way to move between your build, run, and log panes.
+
+---
+
+# 📜 **Scrollback History**
+```
+set -g history-limit 10000
+```
+
+### What it does
+Increases scrollback buffer to 10,000 lines.
+
+### How to use it
+Scroll with mouse wheel or:
+
+```
+Ctrl+a [
+```
+
+Then use:
+- `k/j` to scroll  
+- `q` to exit scroll mode
+
+---
+
+# 🟦 **Status Bar Styling**
+```
+set -g status-bg black
+set -g status-fg white
+set -g status-left " #[bold]tmux "
+set -g status-right "#(date '+%H:%M') "
+```
+
+### What it does
+- Black background, white text
+- Left side shows “tmux”
+- Right side shows current time (updates every minute)
+
+### How to use it
+Purely visual — no interaction needed.
+
+---
+
+# ⌨️ **Vi Mode for Copy/Paste**
+```
+setw -g mode-keys vi
+```
+
+### What it does
+Enables vim-like navigation in copy mode.
+
+### How to use it
+Enter copy mode:
+
+```
+Ctrl+a [
+```
+
+Then:
+- `h/j/k/l` → move  
+- `v` → start selection  
+- `y` → yank (copy)  
+- `q` → exit  
+
+Paste with:
+
+```
+Ctrl+a ]
+```
+
+---
+
+# 🧭 **Putting It All Together: Your 4‑Pane ROS Dev Layout**
+
+Here’s a workflow you’ll love:
+
+### 1. Start tmux
+```
+tmux
+```
+
+### 2. Create panes
+```
+Ctrl+a |     # left/right split
+Ctrl+a -     # split bottom pane
+Alt+Down     # move to bottom
+Ctrl+a |     # split bottom into two
+```
+
+### 3. Assign roles
+- **Top-left:** build (`colcon build --symlink-install`)
+- **Top-right:** run nodes (`ros2 run ...`)
+- **Bottom-left:** logs (`ros2 topic echo ...`)
+- **Bottom-right:** interactive shell
+
+### 4. Navigate instantly
+```
+Alt + Arrow keys
+```
+
+---
+
+# If you want, I can generate a reusable tmux session script
+
+For example:
+
+```
+tmux new-session -d -s dev
+tmux split-window -h
+tmux split-window -v
+tmux select-pane -L
+tmux split-window -v
+tmux attach -t dev
+```
+
+Just say the word and I’ll build a polished version tailored to your ROS workflow.
+
 # 🎉 Done
