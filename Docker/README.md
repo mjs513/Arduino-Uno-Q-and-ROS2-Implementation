@@ -442,19 +442,5 @@ Ctrl+a |     # split bottom into two
 Alt + Arrow keys
 ```
 
----
-
-# If you want, I can generate a reusable tmux session script
-
-For example:
-
-```
-tmux new-session -d -s dev
-tmux split-window -h
-tmux split-window -v
-tmux select-pane -L
-tmux split-window -v
-tmux attach -t dev
-```
 
 # 🎉 Done
