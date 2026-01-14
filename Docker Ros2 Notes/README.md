@@ -98,6 +98,7 @@ When you exit, the container disappears and your base image stays clean.
 
 ## 🟢 If you want the demo nodes (recommended for testing)
 Just install them:
+```
 RUN apt update && apt install -y --no-install-recommends \
     ros-jazzy-ros-base \
     ros-jazzy-demo-nodes-cpp \
@@ -107,8 +108,10 @@ RUN apt update && apt install -y --no-install-recommends \
     python3-vcstool \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
+```
     
 Then rebuild the image.
+
 
 
 
