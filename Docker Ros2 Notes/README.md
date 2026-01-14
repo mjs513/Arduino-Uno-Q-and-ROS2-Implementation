@@ -245,3 +245,15 @@ htop
 
 This is the cleanest dev workflow for ROS 2 inside a container.
 
+##  A Second and Minimal inline tmux command (no script)
+If you don’t want a script, you can launch the layout directly:
+Code
+```
+tmux new-session \; \
+  split-window -h \; \
+  split-window -v \; \
+  select-pane -t 0 \; \
+  split-window -v
+```
+Then manually run your commands in each pane.
+
