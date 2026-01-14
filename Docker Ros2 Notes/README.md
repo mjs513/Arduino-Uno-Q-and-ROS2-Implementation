@@ -18,7 +18,7 @@ Here are the three approaches.
 
 ---
 
-# 🟢 **Option 1 — Install demo nodes interactively inside the container**
+## 🟢 **Option 1 — Install demo nodes interactively inside the container**
 
 Start your container:
 
@@ -47,7 +47,7 @@ If you exit and re‑run the container, they won’t be there unless you commit 
 
 ---
 
-# 🟦 **Option 2 — Install demo nodes in a running container and save it**
+## 🟦 **Option 2 — Install demo nodes in a running container and save it**
 
 If you want to keep the changes without editing the Dockerfile:
 
@@ -75,7 +75,7 @@ Now you have a new image that includes the demo nodes, without ever touching the
 
 ---
 
-# 🟩 **Option 3 — Use a temporary container just for testing**
+## 🟩 **Option 3 — Use a temporary container just for testing**
 
 If you don’t want to save anything:
 
@@ -93,6 +93,7 @@ apt install -y ros-jazzy-demo-nodes-cpp ros-jazzy-demo-nodes-py
 When you exit, the container disappears and your base image stays clean.
 
 ---
+
 
 
 
