@@ -457,6 +457,4 @@ tmux split-window -v
 tmux attach -t dev
 ```
 
-Just say the word and I’ll build a polished version tailored to your ROS workflow.
-
 # 🎉 Done
