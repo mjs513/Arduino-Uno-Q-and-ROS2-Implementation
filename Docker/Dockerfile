@@ -5,28 +5,27 @@ ENV DEBIAN_FRONTEND=noninteractive
 # -------------------------------
 # Base system setup
 # -------------------------------
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt update && apt install -y \
     locales curl gnupg2 lsb-release git \
-    && locale-gen en_US en_US.UTF-8 \
-    && rm -rf /var/lib/apt/lists/*
+    && locale-gen en_US en_US.UTF-8
 
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
 # -------------------------------
-# ROS 2 Jazzy APT key + repo
+# ROS 2 Jazzy APT key + repo (corrected)
 # -------------------------------
 RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key \
     | gpg --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg
 
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \
-    http://packages.ros.org/ros2/ubuntu noble main" \
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu noble main" \
     > /etc/apt/sources.list.d/ros2.list
 
 # -------------------------------
-# ROS 2 Base + dev tools
+# ROS 2 Desktop + dev tools + colcon + rosdep
 # -------------------------------
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt update && apt install -y \
+# changed from desktop to base
     ros-jazzy-ros-base \
     python3-colcon-common-extensions \
     python3-rosdep \
@@ -34,13 +33,21 @@ RUN apt update && apt install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN rosdep init || true && rosdep update
+RUN rosdep init || true
+
+# -------------------------------
+# X11 GUI support
+# -------------------------------
+#RUN apt update && apt install -y \
+#    x11-apps \
+#    mesa-utils \
+#    libgl1-mesa-glx \
+#    libx11-6
 
 # -------------------------------
 # tmux + clean config
 # -------------------------------
-RUN apt update && apt install -y --no-install-recommends tmux \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt install -y tmux
 
 RUN mkdir -p /etc/tmux && \
     printf "%s\n" \
@@ -66,16 +73,23 @@ RUN mkdir -p /etc/tmux && \
 RUN echo "alias tmux='tmux -f /etc/tmux/tmux.conf'" >> /etc/bash.bashrc
 
 # -------------------------------
-# Workspace
+# Pre-built workspace
 # -------------------------------
 RUN mkdir -p /opt/ros_ws/src
 WORKDIR /opt/ros_ws
 
+# Example repo - replace with your own
+#RUN git clone https://github.com/ros2/examples src/examples
+
+# Build workspace
+#RUN . /opt/ros/jazzy/setup.sh && \
+#    colcon build --symlink-install
+
 # -------------------------------
 # Auto-source ROS + workspace
 # -------------------------------
-RUN printf "source /opt/ros/jazzy/setup.bash\nsource /opt/ros_ws/install/setup.bash\n" \
-    > /etc/profile.d/ros_setup.sh
+RUN echo "source /opt/ros/jazzy/setup.bash" >> /etc/bash.bashrc && \
+    echo "source /opt/ros_ws/install/setup.bash" >> /etc/bash.bashrc
 
 CMD ["/bin/bash"]
 
