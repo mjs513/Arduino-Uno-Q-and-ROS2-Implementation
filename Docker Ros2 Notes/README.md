@@ -94,6 +94,24 @@ When you exit, the container disappears and your base image stays clean.
 
 ---
 
+# Build the Docker Container with Nodes preinstalled
+
+## 🟢 If you want the demo nodes (recommended for testing)
+Just install them:
+RUN apt update && apt install -y --no-install-recommends \
+    ros-jazzy-ros-base \
+    ros-jazzy-demo-nodes-cpp \
+    ros-jazzy-demo-nodes-py \
+    python3-colcon-common-extensions \
+    python3-rosdep \
+    python3-vcstool \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+    
+Then rebuild the image.
+
+
+
 
 
 
