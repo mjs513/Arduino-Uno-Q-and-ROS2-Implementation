@@ -1,7 +1,7 @@
 # 📘 ROS 2 Jazzy Docker Environment  
 *A minimal, developer‑friendly container for ROS 2 Jazzy on Ubuntu 24.04*
 
-This document explains every command in the Dockerfile and provides clear instructions for building and running the container.
+This document explains every command in the Dockerfile and provides clear instructions for building and running the container and was generated with CoPilot
 
 ---
 
