@@ -444,3 +444,20 @@ Alt + Arrow keys
 
 
 # 🎉 Done
+
+# Other
+
+In the dockerfile you will see several lines commented out.  Had to do this this to save space since if you try to install ROS2-desktop you run out of room to install.  Didn't investigate why - could be dockaer image space is too small.  But here is a quick summary of changes
+
+1.  Change from using `ros-jazzy-desktop ` to using `ros-jazzy-base`
+2.  Removed use of GUI tools:
+```
+# -------------------------------
+# X11 GUI support
+# -------------------------------
+#RUN apt update && apt install -y \
+#    x11-apps \
+#    mesa-utils \
+#    libgl1-mesa-glx \
+#    libx11-6
+```
