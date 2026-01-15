@@ -120,7 +120,10 @@ Then rebuild the image.
 Run your dev image:
 
 bash
-`docker run -it --net=host --name ros2_dev os2_jazzy`
+```
+docker run -it --net=host --name ros2_dev os2_jazzy
+```
+
 The important part is --name ros2_dev  
 This gives the container a predictable name so you don’t have to look up its ID later.
 
@@ -130,7 +133,10 @@ You’ll now be inside the first shell.
 In that second terminal, run:
 
 bash
-`docker exec -it ros2_dev bash`
+```
+docker exec -it ros2_dev bash
+```
+
 Boom — you now have two independent shells inside the same running container.
 
 Window 1:
@@ -140,14 +146,20 @@ Code
 Window 2:
 
 Code
-`ros2 run demo_nodes_py listener`
+```
+ros2 run demo_nodes_py listener
+```
+
 They’ll discover each other instantly because you used --net=host.
 
 ## 🟩 Alternative: If you forgot to name the container
 List running containers:
 
 bash
-`docker ps`
+```
+docker ps
+```
+
 You’ll see something like:
 
 Code
@@ -256,4 +268,5 @@ tmux new-session \; \
   split-window -v
 ```
 Then manually run your commands in each pane.
+
 
