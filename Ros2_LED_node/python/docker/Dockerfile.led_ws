@@ -1,0 +1,35 @@
+FROM ros2-base:jazzy
+
+# -------------------------------
+# Single unified workspace
+# -------------------------------
+RUN mkdir -p /opt/ros_ws/src
+WORKDIR /opt/ros_ws
+
+# Copy your entire python/src folder (contains ros_led + python packages)
+COPY ./python/src /opt/ros_ws/src
+
+# Copy requirements for your Python packages
+COPY ./python/requirements.txt /opt/ros_ws/requirements.txt
+
+# Install Python deps
+RUN pip install --no-cache-dir -r /opt/ros_ws/requirements.txt --break-system-packages \
+    && pip cache purge
+
+# Install ROS package dependencies
+RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && \
+    rosdep update && \
+    rosdep install --from-paths src --ignore-src -y"
+
+# Build the workspace
+RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && \
+    colcon build"
+
+# Auto-source
+RUN printf "%s\n" \
+"source /opt/ros/jazzy/setup.bash" \
+"source /opt/ros_ws/install/setup.bash" \
+>> /etc/bash.bashrc
+
+CMD ["/bin/bash"]
+
