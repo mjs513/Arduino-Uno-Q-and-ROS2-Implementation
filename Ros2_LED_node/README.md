@@ -25,8 +25,8 @@ python/
 └── setup.py
 python/requirements.txt
 docker/
-Dockerfile.base
-Dockerfile.led_ws
+├── Dockerfile.base
+├── Dockerfile.led_ws
 ```
 
 ---
