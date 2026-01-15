@@ -16,13 +16,13 @@ This is based on the effort of miguelgonrod - https://github.com/miguelgonrod/ro
 ```
 python/
 └── src/
-├── ros_led/
-├── <your python ROS package>
-├── resource/
-├── test/
-├── package.xml
-├── setup.cfg
-└── setup.py
+     ├── ros_led/
+     ├── <your python ROS package>
+     ├── resource/
+     ├── test/
+     ├── package.xml
+     ├── setup.cfg
+     └── setup.py
 python/requirements.txt
 docker/
 ├── Dockerfile.base
