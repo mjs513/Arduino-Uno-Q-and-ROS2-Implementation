@@ -24,6 +24,8 @@ RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && \
 # Build the workspace
 RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && \
     colcon build"
+		
+ENV ROS_DOMAIN_ID=0
 
 # Auto-source
 RUN printf "%s\n" \
