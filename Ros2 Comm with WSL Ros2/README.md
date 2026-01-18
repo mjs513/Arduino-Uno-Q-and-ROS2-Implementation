@@ -36,9 +36,10 @@ sudo apt install -y ros-jazzy-demo-nodes-cpp ros-jazzy-demo-nodes-py
 ```
 
 ### 2.2 Create FastDDS XML file
-Create File: ~/.fastdds_pc.xml
-Replace 192.168.1.XXX with the UNO Q’s IP.
+his tells the PC to explicitly look for the UNO Q.
+Replace 192.168.1.XXX with the UNO Q’s LAN IP.
 ```
+cat <<EOF > ~/.fastdds.xml
 <profiles>
   <transport_descriptors>
     <transport_descriptor>
@@ -62,13 +63,14 @@ Replace 192.168.1.XXX with the UNO Q’s IP.
     </rtps>
   </participant>
 </profiles>
+EOF
 ```
 
 ### 2.3 Add FastDDS environment variables
 Append to `~/.bashrc`:
 ```
-export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-export FASTRTPS_DEFAULT_PROFILES_FILE=$HOME/.fastdds_pc.xml
+echo 'export RMW_IMPLEMENTATION=rmw_fastrtps_cpp' >> ~/.bashrc
+echo 'export FASTRTPS_DEFAULT_PROFILES_FILE=$HOME/.fastdds.xml' >> ~/.bashrc
 export ROS_DOMAIN_ID=0
 ```
 Reload:
@@ -83,6 +85,7 @@ ros2 daemon start
 ```
 
 ## 🟧 3. Arduino FastDDS configuration
+This step was made permanent in the Docker Base Image for Ros2, but for reference and sake of my memory.
 
 ### 3.1 FastDDS XML baked into the image
 Create File: /root/.fastdds_uno.xml
@@ -430,7 +433,6 @@ You should see:
 I heard: [Hello World: N]
 ```
 
-
 ## 🟧 6. Troubleshooting
 **XML file not found**
 Check:
@@ -448,8 +450,5 @@ Verify:
 Listener works but XML errors appear
 Recreate the XML file using a clean heredoc block.
 
-Recreate the XML file using a clean heredoc block.
-
 ## 🟩 7. Credits
 “Technical guidance provided with the help of Microsoft Copilot.”
-
