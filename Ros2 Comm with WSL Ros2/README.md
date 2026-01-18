@@ -28,9 +28,8 @@ UNO Q:
 ip addr
 ```
 If the ip addresses for the PC(WSL) and the UNO Q are not on the same network, i.e., 192.168.1.---- then you will need to configure WSL2 for Mirrored netowrk mode:
-🌐 WSL2 Mirrored Networking Mode — Full 
 
-[ WSL2 Mirrored Networking Mode — Full ](https://github.com)
+[ WSL2 Mirrored Networking Mode — Full ]([https://github.com](https://github.com/mjs513/Arduino-Uno-Q-and-ROS2-Implementation/blob/main/Ros2%20Comm%20with%20WSL%20Ros2/%F0%9F%8C%90%20WSL2%20Mirrored%20Networking%20Mode%20%E2%80%94%20Full%20.md))
 
 ## 🟩 2. PC (WSL2) Setup
 ### 2.1 Install demo nodes
