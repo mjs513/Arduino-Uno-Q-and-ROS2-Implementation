@@ -269,4 +269,56 @@ tmux new-session \; \
 ```
 Then manually run your commands in each pane.
 
+# 🧰 Tmux Cheat Sheet (ASCII / Markdown)
+-----------------------------------------------------------------
+                        TMUX CHEAT SHEET                         
+-----------------------------------------------------------------
+```
+PREFIX KEY
+  Ctrl+a                → Main tmux prefix
+  Ctrl+a then a         → Send literal Ctrl+a to program
+
+PANE MANAGEMENT
+  Ctrl+a |              → Split pane vertically (left/right)
+  Ctrl+a -              → Split pane horizontally (top/bottom)
+
+PANE NAVIGATION (NO PREFIX)
+  Alt + Left            → Move to left pane
+  Alt + Right           → Move to right pane
+  Alt + Up              → Move to upper pane
+  Alt + Down            → Move to lower pane
+
+PANE RESIZING (MOUSE)
+  Drag pane borders     → Resize panes
+  Scroll wheel          → Scroll through history
+
+WINDOWS
+  Ctrl+a c              → Create new window
+  Ctrl+a n              → Next window
+  Ctrl+a p              → Previous window
+  Ctrl+a w              → List windows
+
+COPY MODE (VI STYLE)
+  Ctrl+a [              → Enter copy mode
+  k / j                 → Move up / down
+  /                     → Search forward
+  ?                     → Search backward
+  v                     → Begin selection
+  y                     → Yank (copy)
+  q                     → Quit copy mode
+
+STATUS BAR
+  Left:  "tmux"
+  Right: Current time (HH:MM)
+
+MISC
+  Ctrl+a d              → Detach session
+  tmux attach           → Reattach to last session
+  tmux ls               → List sessions
+  tmux kill-session -t X→ Kill session X
+
+```
+
+
+
 
