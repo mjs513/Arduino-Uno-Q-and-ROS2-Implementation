@@ -1,0 +1,17 @@
+# ============================================================
+# Base image: Your custom ROS 2 Jazzy + FastDDS base
+# ============================================================
+FROM ros-jazzy-base
+
+# ------------------------------------------------------------
+# Install demo talker node
+# ------------------------------------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-jazzy-demo-nodes-cpp \
+ && rm -rf /var/lib/apt/lists/*
+
+# ------------------------------------------------------------
+# Default command: interactive shell
+# ------------------------------------------------------------
+CMD ["bash"]
+
