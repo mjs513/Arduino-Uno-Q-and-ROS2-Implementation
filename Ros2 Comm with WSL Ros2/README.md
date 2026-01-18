@@ -430,18 +430,27 @@ You should see:
 I heard: [Hello World: N]
 ```
 
+
 ## 🟧 6. Troubleshooting
-XML file not found
+**XML file not found**
 Check:
-Code
+```
 echo $FASTRTPS_DEFAULT_PROFILES_FILE
+```
 No nodes appear
+
 Verify:
-•	Both machines use FastDDS
-•	Both XML files point to each other’s IP
-•	Both are on the same subnet
-•	Docker uses --net=host
+1. Both machines use FastDDS
+2. Both XML files point to each other’s IP
+3. Both are on the same subnet
+4. Docker uses --net=host
+
 Listener works but XML errors appear
+Recreate the XML file using a clean heredoc block.
+
+## 🟩 7. Credits
+“Technical guidance provided with the help of Microsoft Copilot.”
+
 Recreate the XML file using a clean heredoc block.
 ## 🟩 7. Credits
 
