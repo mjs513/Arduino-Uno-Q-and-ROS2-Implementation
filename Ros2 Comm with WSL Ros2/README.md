@@ -30,6 +30,8 @@ ip addr
 If the ip addresses for the PC(WSL) and the UNO Q are not on the same network, i.e., 192.168.1.---- then you will need to configure WSL2 for Mirrored netowrk mode:
 🌐 WSL2 Mirrored Networking Mode — Full 
 
+[🌐 WSL2 Mirrored Networking Mode — Full ](docs/CONTRIBUTING.md)
+
 ## 🟩 2. PC (WSL2) Setup
 ### 2.1 Install demo nodes
 ```
