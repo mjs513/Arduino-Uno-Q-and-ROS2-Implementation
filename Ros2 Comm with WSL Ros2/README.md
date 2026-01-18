@@ -448,11 +448,8 @@ Verify:
 Listener works but XML errors appear
 Recreate the XML file using a clean heredoc block.
 
-## 🟩 7. Credits
-“Technical guidance provided with the help of Microsoft Copilot.”
-
 Recreate the XML file using a clean heredoc block.
-## 🟩 7. Credits
 
+## 🟩 7. Credits
 “Technical guidance provided with the help of Microsoft Copilot.”
 
