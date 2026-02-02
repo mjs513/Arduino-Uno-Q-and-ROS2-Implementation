@@ -1005,10 +1005,18 @@ You will need to modify the `sonar.py` file and uncomment the commented out code
 
 Just as a reminder if you dont want to use `tmux` you can open a second shell to the Q and then run:  
 ```text
+
 docker exec -it **** base
 ```
 where `***` is the container id of the running `ros-sonar-slam` image.
 
 Remember you can do a `docker ps -a` to see the list of containers.
 
-  
+## Setup and Maps
+![Hardware Used for Testing](images/hardware.png "Hardware Setup")
+
+![Initial Map](images/map1.png "Initial Map")
+
+![Map2](images/map2.png "Example 1 Map")
+
+![Map3](images/map3.png "Example 2 Map")
