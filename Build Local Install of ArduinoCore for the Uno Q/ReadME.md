@@ -192,8 +192,8 @@ This method creates a symbolic link between where you built the core and where t
 
 ## 1. Clone the ArduinoCore-zephyr repo to a git directory
 ```
-mkdir git && cd git
-git clone --branch main https://github.com/arduino/ArduinoCore-zephyr
+mkdir my_new_zephyr_folder && cd my_new_zephyr_folder
+git clone https://github.com/arduino/ArduinoCore-zephyr
 ```
 
 ## 2. Install dependeciences
@@ -202,11 +202,12 @@ sudo apt install python3-pip python3-setuptools python3-venv build-essential git
 ```
 ## 3. Create a arduino uno q bootstrap script
 ```
+cd ArduinoCore-zephyr
 cd extra
 touch bootstrap_q_only.sh
 nano bootstrap_q_only.sh
 ```
-Past the following into `bootstrap_q_only.sh`
+Paste the following into `bootstrap_q_only.sh`
 ```
 #!/bin/bash
 
@@ -242,17 +243,56 @@ then change mode to exectuable
 chmod +x bootstrap_q_only.sh
 ```
 
+## 4. Avoid Fatal error
+If you try and run `bootstrap_q_only` script you will probably get the following error message:
+```
+FATAL ERROR: already initialized in /home/arduino/my_new_zephyr_folder, aborting.
+  Hint: if you do not want a workspace there,
+  remove this directory and re-run this command:
+
+  /home/arduino/my_new_zephyr_folder/.west
+```
+To avoid this error message run the following command:
+```
+rm -r ../my_new_zephyr_folder/.west
+```
+
 ## 4. Run the `bootstrap` script
 ```bash
 cd ArduinoCore-zephyr (if necessary)
 ./extra/bootstrap_q_only.sh
 ```
 
-NOTE:  If you get an error message at this point:
-1.  change directory to /my_new_zephyr_folder and do a `rm -r .west
-2.  change back to the  ArduinoCore-zephyr directory and execute `./extra/bootstrap_q_only.sh` again.
+## 5. Fixing Submodule URLs 
 
-## 5. Setup Local Installation Configuration
+Note until .gitmodules is updated use first method and moddify the downloaded .gitmodules files
+```
+[submodule "libraries/Arduino_RouterBridge"]
+        path = libraries/Arduino_RouterBridge
+        url = https://github.com/arduino-libraries/Arduino_RouterBridge.git
+[submodule "libraries/Arduino_RPClite"]
+        path = libraries/Arduino_RPClite
+        url = https://github.com/arduino-libraries/Arduino_RPClite.git
+```
+and run
+```bash
+git submodule update --init
+```
+
+## 6. Building the Core
+
+The loader is compiled for each board by running the `./extra/build.sh` script.
+The target can be specified either with the Arduino board name (as defined in
+boards.txt), or with the Zephyr board name and any additional arguments that
+may be required by the Zephyr build system.
+
+To build for Arduino Uno Q:
+
+```bash
+./extra/build.sh arduino_uno_q
+```
+
+## 7. Setup Local Installation Configuration
 In this method a symbolic link is used
 
 1. Create the directory:
@@ -263,10 +303,10 @@ mkdir -p  ~/Arduino/hardware/arduino
 ```
 cd  ~/Arduino/hardware/arduino 
 ```
-4. Create a symbolic link to your github project.
 
+4. Create a symbolic link to your github project.
 ```
-ln -s /home/arduino/git/ArduinoCore-zephyr/ zephyr
+ln -s /home/arduino/my_new_zephyr_folder/ArduinoCore-zephyr/ zephyr
 ```
 
 Note: if you do not change to the `~/Arduino/hardware/arduino` the link command would be:
@@ -276,18 +316,6 @@ ln -s /home/arduino/git/ArduinoCore-zephyr/  ~/Arduino/hardware/arduino/zephyr
 5. Disable the released version:
 ```
 mv ~/.arduino15/packages/arduino/hardware/zephyr.disable ~/.arduino15/packages/arduino/hardware/zephyr
-```
-
-## 6. Fixing libraries:
-```
-cd ~/git
-git clone https://github.com/arduino-libraries/Arduino_RouterBridge.git
-git clone https://github.com/arduino-libraries/Arduino_RPClite.git
-cd arduino@Uno-Q4:~/git$ cd ArduinoCore-zephyr/libraries/
-rmdir Arduino_RouterBridge
-ln -s ~/git/Arduino_RouterBridge
-rmdir Arduino_RPClite
-ln -s ~/git/Arduino_RPClite
 ```
 
 ## 7. Flashing the Loader
@@ -322,6 +350,14 @@ You you get any errors at this step this may fix it.
 ```
 arduino-app-cli system cleanup
 ```
+
+## 3. Remove the Symbolic Link
+```
+cd  ~/Arduino/hardware/arduino 
+rm zehyr
+```
+and link is removed.
+
 
 # Credits
 See [Install sources built zephyr on UNO Q for applab](https://forum.arduino.cc/t/install-sources-built-zephyr-on-uno-q-for-applab/1429150/43?_gl=1*17o7n6q*_up*MQ..*_ga*NTc1NDk0Njk5LjE3NzA5MDQ1NzE.*_ga_NEXN8H46L5*czE3NzA5MDQ1NzAkbzEkZzAkdDE3NzA5MDQ1NzAkajYwJGwwJGgxNzc4MzYxMjI.)
